@@ -1,0 +1,8 @@
+{
+  "name": "credocarbon",
+  "description": "A premier online brokerage platform for trading carbon credits and sustainable assets. Invest in the future of the planet with real-time analytics and AI-driven insights.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CredoCarbon | Institutional Carbon Exchange</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              sienna: { // Primary accent - earthy orange/brown
+                50: '#fef3ec',
+                100: '#fee1d2',
+                200: '#fec2a8',
+                300: '#fe9d73',
+                400: '#fd6c3c',
+                500: '#f84e1b',
+                600: '#e53e0f',
+                700: '#c5320c',
+                800: '#a32909',
+                900: '#862007',
+                950: '#480f02',
+              },
+              stone: { // Neutral darks and lights - warmer gray
+                50: '#fafaf9',
+                100: '#f5f5f4',
+                200: '#e7e5e4',
+                300: '#d6d3d1',
+                400: '#a8a29e',
+                500: '#78716c',
+                600: '#57534e',
+                700: '#44403c',
+                800: '#292524',
+                900: '#1c1917',
+                950: '#0c0a09',
+              },
+              forest: { // Existing green (can remain for environmental connotations)
+                50: '#f0fdf4',
+                100: '#dcfce7',
+                200: '#bbf7d0',
+                300: '#86efac',
+                400: '#4ade80',
+                500: '#22c55e',
+                600: '#16a34a',
+                700: '#15803d',
+                800: '#166534',
+                900: '#14532d',
+                950: '#022c22',
+              },
+              emerald: { // Existing green (can remain)
+                50: '#ecfdf5',
+                100: '#d1fae5',
+                200: '#a7f3d0',
+                300: '#6ee7b7',
+                400: '#34d399',
+                500: '#10b981',
+                600: '#059669',
+                700: '#047857',
+                800: '#065f46',
+                900: '#064e3b',
+                950: '#022c22',
+              },
+              rose: { // Keep rose for negative/danger sentiment
+                50: '#fff1f2',
+                100: '#ffe4e6',
+                200: '#fecdd3',
+                300: '#fda4af',
+                400: '#fb7185',
+                500: '#f43f5e',
+                600: '#e11d48',
+                700: '#be123c',
+                800: '#9f1239',
+                900: '#881337',
+                950: '#450a10',
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              display: ['Inter', 'system-ui', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+      body { 
+        font-family: 'Inter', sans-serif; 
+        -webkit-font-smoothing: antialiased; 
+        background-color: #fafaf9; /* stone-50 */
+        color: #0c0a09; /* stone-950 */
+      }
+      
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #a8a29e; /* stone-400 */ border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: #57534e; /* stone-600 */ }
+      
+      .nav-active {
+        color: #ffffff !important;
+        background-color: #fd6c3c; /* sienna-400 */
+        box-shadow: 0 10px 15px -3px rgba(253, 108, 60, 0.2);
+      }
+
+      .glass-sidebar {
+        background: linear-gradient(180deg, #44403c 0%, #1c1917 100%); /* stone-700 to stone-900 */
+        border-right: 1px solid #57534e; /* stone-600 */
+      }
+
+      .trading-card {
+        background: white;
+        border: 1px solid #e7e5e4; /* stone-200 */
+        box-shadow: 0 10px 25px -5px rgba(12, 10, 9, 0.05); /* stone-950 with alpha */
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .trading-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 35px -10px rgba(12, 10, 9, 0.1); /* stone-950 with alpha */
+      }
+
+      /* Global Button Hover Effects */
+      .btn-primary-sienna {
+        transition: all 0.2s ease-in-out;
+      }
+      .btn-primary-sienna:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px -3px rgba(163, 41, 9, 0.3), 0 4px 6px -2px rgba(163, 41, 9, 0.1); /* sienna-800 with alpha */
+      }
+      .btn-primary-sienna:active {
+        transform: scale(0.95);
+        box-shadow: none;
+      }
+
+
+      @keyframes fade-in {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in {
+        animation: fade-in 0.5s ease-out forwards;
+      }
+
+      @keyframes price-flash-up {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(-10px); opacity: 0; }
+      }
+
+      @keyframes price-flash-down {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(10px); opacity: 0; }
+      }
+      
+      .price-flash-up {
+        animation: price-flash-up 0.75s ease-out forwards;
+      }
+      .price-flash-down {
+        animation: price-flash-down 0.75s ease-out forwards;
+      }
+
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "react/": "https://aistudiocdn.com/react@^19.2.0/",
+        "react": "https://aistudiocdn.com/react@^19.2.0",
+        "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+        "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
+        "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+        "recharts": "https://aistudiocdn.com/recharts@^3.5.1",
+        "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0"
+      }
+    }
+    </script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
